@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+        lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>단축 URL</title>
+</head>
+<body>
+    <h1>단축 URL</h1>
+    <p th:text="|https://${param.origin}|"></p>
+
+    <a href="#" th:href="@{/{shortUrl}(shortUrl=${param.short})}" class="btn btn-primary" role="button">
+        <p th:text="|http://localhost:8080/${param.short}|"></p>
+    </a>
+
+</body>
+</html>
