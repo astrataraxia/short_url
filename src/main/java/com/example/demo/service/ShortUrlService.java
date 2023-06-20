@@ -17,14 +17,11 @@ public class ShortUrlService {
         UrlEntry entity = urlRepository.saveUrl(origin);
         return ShortUrlCreateResponseDto.from(entity);
     }
-
     public String getOriginUrlByShortUrl(String shortUrlKey) {
         UrlEntry urlEntry = urlRepository.findByShortUrl(shortUrlKey)
                 .orElseThrow(NotFoundShortUrlException::new);
         urlEntry.countUp();
-
         urlRepository.update(urlEntry);
-
         return urlEntry.fullPath(urlEntry);
     }
 

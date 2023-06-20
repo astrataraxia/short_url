@@ -33,13 +33,19 @@ public class UrlEntry {
         requestCount++;
     }
 
-    private String makeShort(String originUrl) {
-        //TODO: Base56 인코딩을 적용해봐야된다. (지금은 그냥 무작위로 적용중).. 암호화는 되도 복호화는 안됨.
+    public String fullPath(UrlEntry urlEntry) {
+        if (urlEntry.getOriginUrl().startsWith("http://") || urlEntry.getOriginUrl().startsWith("https://")) {
+            return urlEntry.getOriginUrl();
+        } else {
+            return  "https://" + urlEntry.getOriginUrl();
+        }
+    }
 
-        String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    private String makeShort(String originUrl) {
+        String characters = "23456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz";
         StringBuilder shortUrlBuilder = new StringBuilder();
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 8; i++) {
             int index = (int) (Math.random() * characters.length());
             shortUrlBuilder.append(characters.charAt(index));
         }
@@ -51,16 +57,11 @@ public class UrlEntry {
             originUrl = originUrl.substring(12); // Remove "https://www." (12 characters)
         } else if (originUrl.startsWith("https://")) {
             originUrl = originUrl.substring(8); // Remove "https://" (8 characters)
+        } else if (originUrl.startsWith("www.")) {
+            originUrl = originUrl.substring(4);
         }
         return originUrl;
     }
 
-    public String fullPath(UrlEntry urlEntry) {
-        if (urlEntry.getOriginUrl().startsWith("http://") || urlEntry.getOriginUrl().startsWith("https://")) {
-            return urlEntry.getOriginUrl();
-        } else {
-            return  "https://" + urlEntry.getOriginUrl();
-        }
-    }
 }
 

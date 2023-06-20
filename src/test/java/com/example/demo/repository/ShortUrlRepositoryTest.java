@@ -45,14 +45,25 @@ class ShortUrlRepositoryTest {
         UrlEntry na = urlRepository.saveUrl(naver);
         UrlEntry in = urlRepository.saveUrl(inflearn);
 
-        assertThat(urlRepository.findByShortUrl(go.getShortUrl())).isSameAs(go);
-        assertThat(urlRepository.findByShortUrl(na.getShortUrl())).isSameAs(na);
-        assertThat(urlRepository.findByShortUrl(in.getShortUrl())).isSameAs(in);
+        assertThat(urlRepository.findByShortUrl(go.getShortUrl()).get()).isSameAs(go);
+        assertThat(urlRepository.findByShortUrl(na.getShortUrl()).get()).isSameAs(na);
+        assertThat(urlRepository.findByShortUrl(in.getShortUrl()).get()).isSameAs(in);
     }
 
     @Test
     @DisplayName("update 확인")
     void updateTest() {
+        String google = "www.google.com";
 
+        UrlEntry go = urlRepository.saveUrl(google);
+
+        assertThat(go.getRequestCount()).isEqualTo(0);
+
+        for (int i = 0; i < 10; i++) {
+            go.countUp();
+        }
+        urlRepository.update(go);
+
+        assertThat(go.getRequestCount()).isEqualTo(10);
     }
 }
