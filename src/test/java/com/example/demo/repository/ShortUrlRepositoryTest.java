@@ -51,20 +51,8 @@ class ShortUrlRepositoryTest {
     }
 
     @Test
-    @DisplayName("전체 조회")
-    void findAllTest() {
+    @DisplayName("update 확인")
+    void updateTest() {
 
-        String google = "www.google.com";
-        String naver= "www.naver.com";
-        String inflearn= "www.inflearn.com";
-
-        UrlEntry go = urlRepository.saveUrl(google);
-        UrlEntry na = urlRepository.saveUrl(naver);
-        UrlEntry in = urlRepository.saveUrl(inflearn);
-
-        assertThat(urlRepository.findAll().size()).isEqualTo(3);
-        assertThat(urlRepository.findAll().contains(go)).isTrue();
-        assertThat(urlRepository.findAll().contains(na)).isTrue();
-        assertThat(urlRepository.findAll().contains(in)).isTrue();
     }
 }

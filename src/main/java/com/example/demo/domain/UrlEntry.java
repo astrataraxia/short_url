@@ -7,7 +7,6 @@ import lombok.ToString;
 
 @EqualsAndHashCode
 @Getter
-@Setter
 @ToString
 public class UrlEntry {
 
@@ -29,6 +28,10 @@ public class UrlEntry {
         return new UrlEntry(originUrl);
     }
 
+
+    public void countUp() {
+        requestCount++;
+    }
 
     private String makeShort(String originUrl) {
         //TODO: Base56 인코딩을 적용해봐야된다. (지금은 그냥 무작위로 적용중).. 암호화는 되도 복호화는 안됨.
@@ -52,8 +55,12 @@ public class UrlEntry {
         return originUrl;
     }
 
-    public void countUp() {
-        requestCount++;
+    public String fullPath(UrlEntry urlEntry) {
+        if (urlEntry.getOriginUrl().startsWith("http://") || urlEntry.getOriginUrl().startsWith("https://")) {
+            return urlEntry.getOriginUrl();
+        } else {
+            return  "https://" + urlEntry.getOriginUrl();
+        }
     }
 }
 

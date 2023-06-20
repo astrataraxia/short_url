@@ -3,15 +3,13 @@ package com.example.demo.repository;
 import com.example.demo.domain.UrlEntry;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
 public class ShortUrlRepository implements UrlRepository {
 
-    private static final Map<String, UrlEntry> urls = new HashMap<>();
+    private static final Map<String, UrlEntry> urls = new ConcurrentHashMap<>();
 
     @Override
     public UrlEntry saveUrl(String origin) {
@@ -21,12 +19,12 @@ public class ShortUrlRepository implements UrlRepository {
     }
 
     @Override
-    public UrlEntry findByShortUrl(String shortUrl) {
-        return urls.get(shortUrl);
+    public Optional<UrlEntry> findByShortUrl(String shortUrl) {
+        return Optional.of(urls.get(shortUrl));
     }
 
     @Override
-    public List<UrlEntry> findAll() {
-        return new ArrayList<>(urls.values());
+    public void update(UrlEntry urlEntry) {
+        urls.put(urlEntry.getShortUrl(), urlEntry);
     }
 }
