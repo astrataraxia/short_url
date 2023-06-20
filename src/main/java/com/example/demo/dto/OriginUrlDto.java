@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class OriginUrlDto {
 
-    private String OriginUrl;
+    private String originUrl;
 }

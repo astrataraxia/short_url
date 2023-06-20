@@ -3,7 +3,8 @@ package com.example.demo.repository;
 import com.example.demo.domain.UrlEntry;
 import org.springframework.stereotype.Repository;
 
-import java.util.*;
+import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Repository
@@ -20,7 +21,7 @@ public class ShortUrlRepository implements UrlRepository {
 
     @Override
     public Optional<UrlEntry> findByShortUrl(String shortUrl) {
-        return Optional.of(urls.get(shortUrl));
+        return Optional.ofNullable(urls.get(shortUrl));
     }
 
     @Override
