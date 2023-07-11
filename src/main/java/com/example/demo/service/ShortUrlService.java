@@ -15,6 +15,7 @@ public class ShortUrlService {
 
     public ShortUrlCreateResponseDto saveUrl(String origin) {
         UrlEntry entity = urlRepository.saveUrl(origin);
+
         return ShortUrlCreateResponseDto.from(entity);
     }
 
@@ -25,5 +26,4 @@ public class ShortUrlService {
         urlRepository.update(urlEntry);
         return urlEntry.fullPath(urlEntry);
     }
-
 }

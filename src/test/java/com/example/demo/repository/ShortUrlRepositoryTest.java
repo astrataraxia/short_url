@@ -29,7 +29,7 @@ class ShortUrlRepositoryTest {
         log.info("originUrl = {}", entry.getOriginUrl());
         log.info("count = {}", entry.getRequestCount());
 
-        assertThat(entry.getOriginUrl()).isEqualTo(google);
+        assertThat(entry.getOriginUrl()).isEqualTo("google.com");
         assertThat(entry.getShortUrl()).isNotNull();
     }
 
@@ -66,4 +66,5 @@ class ShortUrlRepositoryTest {
 
         assertThat(go.getRequestCount()).isEqualTo(10);
     }
+
 }

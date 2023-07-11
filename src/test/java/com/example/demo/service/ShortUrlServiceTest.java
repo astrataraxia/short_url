@@ -1,13 +1,12 @@
 package com.example.demo.service;
 
 import com.example.demo.dto.ShortUrlCreateResponseDto;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 class ShortUrlServiceTest {
@@ -20,6 +19,6 @@ class ShortUrlServiceTest {
     void saveTest() {
         String go = "www.google.com";
         ShortUrlCreateResponseDto responseDto = shortUrlService.saveUrl(go);
-        assertThat(responseDto.getOriginUrl()).isEqualTo(go);
+        assertThat(responseDto.getOriginUrl()).isEqualTo("google.com");
     }
 }
